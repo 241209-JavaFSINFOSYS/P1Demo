@@ -6,10 +6,7 @@ import com.revature.models.Team;
 import com.revature.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController //Combines @Controller and @ResponseBody
 @RequestMapping("/teams") //All HTTP requests ending in /teams will be sent here
@@ -37,6 +34,21 @@ public class TeamController {
         //ResponseEntity helps us build an HTTP Response
         //.ok() sets the status code to 200
         //we send the team object back in the response body
+
+    }
+
+
+    //Exception Handlers------------------------------
+
+    //Spring MVC has a built in Exception handler that cleans up our Controller methods
+
+    //Exception handler for IllegalArgumentException
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgument(IllegalArgumentException e){
+
+        //If an IllegalArgument is thrown, send back a 400 (bad request)
+        //with the Exception message in the response body
+        return ResponseEntity.badRequest().body(e.getMessage());
 
     }
 
