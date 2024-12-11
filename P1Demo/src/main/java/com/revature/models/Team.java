@@ -3,6 +3,8 @@ package com.revature.models;
 import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 //Check the User model comments for notes on each annotation
 
 @Component
@@ -20,7 +22,17 @@ public class Team {
     @Column(nullable=false)
     private String teamLocation;
 
-    //TODO: connection to user FK
+    /*connection to user FK
+    *
+    * mappedBy - Indicates the FK field in the User class
+    *
+    * cascade - defines how changes to a Team records will affect dependent User records
+        * CascadeType.ALL = any change to a Team record will affect dependent records
+    *
+    * */
+    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    //TODO: there will be a problem here
+    private List<User> users;
 
     //boilerplate code-----------------------no args, all args, getter/setter, toString
 
@@ -55,6 +67,14 @@ public class Team {
 
     public void setTeamLocation(String teamLocation) {
         this.teamLocation = teamLocation;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     @Override
