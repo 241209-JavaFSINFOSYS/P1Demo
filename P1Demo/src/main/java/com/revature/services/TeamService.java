@@ -4,7 +4,9 @@ package com.revature.services;
 //User input validation, Data manipulation/reformatting, User authentication, etc.
 
 import com.revature.models.Team;
+import org.springframework.stereotype.Service;
 
+@Service //1 of the 4 stereotype annotations (makes a class a bean)
 public class TeamService {
 
     //TODO: autowire the DAO

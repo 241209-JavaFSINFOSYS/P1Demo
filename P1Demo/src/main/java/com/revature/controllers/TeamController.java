@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TeamController {
 
     //We're going to use constructor injection to dependency inject the Service
-    private TeamService teamService;
+    private final TeamService teamService;
 
     @Autowired
     public TeamController(TeamService teamService) {
