@@ -17,6 +17,8 @@ public class User {
     @Column(nullable = false) //This column MUST have a value on insert
     private String name;
 
+    //TODO: password field
+
     @Column(nullable = false)
     private String role = "player"; //Every new user will be a player by default
 
