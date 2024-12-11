@@ -16,7 +16,7 @@ public class TeamController {
 
     //TODO: Add a service layer
 
-    //Insert a new Team (HTTP POST request)
+    //Insert a new Team (any POST request ending in /teams will invoke this method)
     @PostMapping
     public ResponseEntity<Team> insertTeam(@RequestBody Team team) {
 
