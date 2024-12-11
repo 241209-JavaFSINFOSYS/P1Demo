@@ -20,17 +20,27 @@ public class User {
     @Column(nullable = false)
     private String role = "player"; //Every new user will be a player by default
 
-    //TODO: FK to team
+    /* FK to team (every user has a team - many users can belong to one team)
+    *
+    * fetch - defines when the Dependency is loaded
+        * LAZY = loads dependency only when it's called
+        * EAGER = loads dependency at runtime (I usually use this)
+    * @JoinColumn - defines the column that will be used to link these tables in the DB
+        * We have to provide the name of the PK field in Team */
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "teamId") //This links our FK to the PK in Team (teamId)
+    private Team team;
 
     //boilerplate code-----------------------no args, all args, getter/setter, toString
 
     public User() {
     }
 
-    public User(int userId, String name, String role) {
+    public User(int userId, String name, String role, Team team) {
         this.userId = userId;
         this.name = name;
         this.role = role;
+        this.team = team;
     }
 
     public int getUserId() {
@@ -57,12 +67,21 @@ public class User {
         this.role = role;
     }
 
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "userId=" + userId +
                 ", name='" + name + '\'' +
                 ", role='" + role + '\'' +
+                ", team=" + team +
                 '}';
     }
 }
