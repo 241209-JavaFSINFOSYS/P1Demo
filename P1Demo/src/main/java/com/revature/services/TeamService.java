@@ -3,13 +3,21 @@ package com.revature.services;
 //The Service layer is where we have our business logic
 //User input validation, Data manipulation/reformatting, User authentication, etc.
 
+import com.revature.DAOs.TeamDAO;
 import com.revature.models.Team;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service //1 of the 4 stereotype annotations (makes a class a bean)
 public class TeamService {
 
-    //TODO: autowire the DAO
+    //autowire the DAO
+    private final TeamDAO teamDAO;
+
+    @Autowired
+    public TeamService(TeamDAO teamDAO) {
+        this.teamDAO = teamDAO;
+    }
 
     //This method inserts new Teams into the DB once they have been validated
     public Team insertTeam(Team team) {
@@ -26,7 +34,7 @@ public class TeamService {
 
         //if none of these ifs get triggered, the Team is valid and can be sent to the DAO
 
-        return team;
+        return teamDAO.save(team);
 
     }
 
