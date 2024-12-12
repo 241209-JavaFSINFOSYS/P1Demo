@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController //Combines @Controller and @ResponseBody
 @RequestMapping("/teams") //All HTTP requests ending in /teams will be sent here
 //TODO: Add @CrossOrigin annotation to allow HTTP from anywhere
@@ -34,6 +36,15 @@ public class TeamController {
         //ResponseEntity helps us build an HTTP Response
         //.ok() sets the status code to 200
         //we send the team object back in the response body
+
+    }
+
+    //Select all Teams (any GET request ending in /teams will invoke this method)
+    @GetMapping
+    public ResponseEntity<List<Team>> getAllTeams(){
+
+        //This time, I'll just do it in one line
+        return ResponseEntity.ok(teamService.getAllTeams());
 
     }
 
