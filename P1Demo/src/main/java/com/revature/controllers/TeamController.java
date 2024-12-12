@@ -48,6 +48,23 @@ public class TeamController {
 
     }
 
+    //Select all Teams by location (any GET request ending in /teams/location/{location})
+    @GetMapping("/location/{location}")
+    public ResponseEntity<?> getTeamsByLocation(@PathVariable String location){
+
+        //Request the List of teams from the Service
+        List<Team> teams = teamService.findByTeamLocation(location);
+
+        //If the List is empty, send a 404 (not found) with a message
+        if(teams.isEmpty()){
+            return ResponseEntity.status(404).body("No teams found in " + location);
+        }
+
+        //Send back the List of Teams if it's not empty
+        return ResponseEntity.ok(teams);
+
+    }
+
 
     //Exception Handlers------------------------------
 

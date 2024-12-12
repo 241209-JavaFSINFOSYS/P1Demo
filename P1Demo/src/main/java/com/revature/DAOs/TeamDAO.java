@@ -4,6 +4,8 @@ import com.revature.models.Team;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 //Extending JpaRepository gives us access to basic CRUD methods that we don't have to write
     //This includes find all, insert, find by id, update, delete
 
@@ -13,6 +15,12 @@ import org.springframework.stereotype.Repository;
 @Repository //1 of the 4 stereotype annotations (makes a class a bean)
 public interface TeamDAO extends JpaRepository<Team, Integer> {
 
-    //TODO: We can make custom queries as well
+    //We can make custom queries as well, for any CRUD op that isn't premade for us
+
+    //This property expression method will find a List of Teams by their location
+    List<Team> findByTeamLocation(String location);
+
+    //NOTE: The method must be named findByXyz
+    //where Xyz is the name of the field we're selecting by
 
 }

@@ -50,4 +50,20 @@ public class TeamService {
 
     }
 
+    //This method gets all teams from the DB BY LOCATION
+    public List<Team> findByTeamLocation(String location){
+
+        //make sure the location is valid
+        if(location == null || location.isBlank()){
+            throw new IllegalArgumentException("Location can't be null or blank!");
+        }
+
+        //get the list of teams
+        List<Team> teams = teamDAO.findByTeamLocation(location);
+
+        //send the List back to the controller
+        return teams;
+
+    }
+
 }
