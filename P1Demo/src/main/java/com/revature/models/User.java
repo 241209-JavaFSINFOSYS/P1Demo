@@ -15,9 +15,10 @@ public class User {
     //@Column isn't necessary UNLESS you want to set DB column name or constraints
 
     @Column(nullable = false) //This column MUST have a value on insert
-    private String name;
+    private String username;
 
-    //TODO: password field
+    @Column(nullable = false) //This column MUST have a value on insert
+    private String password;
 
     @Column(nullable = false)
     private String role = "player"; //Every new user will be a player by default
@@ -38,9 +39,10 @@ public class User {
     public User() {
     }
 
-    public User(int userId, String name, String role, Team team) {
+    public User(int userId, String username, String password, String role, Team team) {
         this.userId = userId;
-        this.name = name;
+        this.username = username;
+        this.password = password;
         this.role = role;
         this.team = team;
     }
@@ -53,12 +55,20 @@ public class User {
         this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRole() {
@@ -81,7 +91,8 @@ public class User {
     public String toString() {
         return "User{" +
                 "userId=" + userId +
-                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
                 ", team=" + team +
                 '}';
