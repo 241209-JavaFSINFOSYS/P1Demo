@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +32,7 @@ public class Team {
     *
     * */
     @OneToMany(mappedBy = "team", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    //TODO: there will be a problem here
+    @JsonIgnore //prevents circular reference in our JSON responses
     private List<User> users;
 
     //boilerplate code-----------------------no args, all args, getter/setter, toString

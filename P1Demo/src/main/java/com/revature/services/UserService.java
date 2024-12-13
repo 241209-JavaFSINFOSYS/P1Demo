@@ -60,9 +60,29 @@ public class UserService {
     }
 
 
-
     //update user password
+    public User updateUserPassword(int userId, String newPassword){
 
+        //TODO: error handling to make sure new password is present/valid
+        //TODO: make sure the new password != old password
+
+        //get the user by ID
+
+        //orElseThrow is a quicker way to handle Optionals
+        //If the optional is empty, throw an exception
+        User user = userDAO.findById(userId).orElseThrow(() -> {
+            throw new IllegalArgumentException("No User found with ID " + userId);
+        });
+
+        //If we reach this point, we know the user exists. Update the password!
+        user.setPassword(newPassword);
+
+        //updates in Spring Data are just save() like with inserts
+        return userDAO.save(user);
+
+        //Why doesn't this create a duplicate user? how does it know it's an update?
+
+    }
 
 
 }
