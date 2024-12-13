@@ -9,7 +9,8 @@ import java.util.List;
 @Repository //make the class a bean
 public interface UserDAO extends JpaRepository<User, Integer> {
 
-    //Find a User by their Team id FK
-    public List<User> findByTeamTeamId(int teamId);
+    //Find a List of Users by their Team id FK
+    //This property expression will need to dig into the team field of User to find the ID
+    public List<User> findByTeam_TeamId(int teamId);
 
 }
