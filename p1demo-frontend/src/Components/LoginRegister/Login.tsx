@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap"
+import { Button, Container } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 
 export const Login:React.FC = () => {
@@ -11,14 +11,14 @@ export const Login:React.FC = () => {
 
 
     return(
-        <>
+        <Container>
             <h3>Login</h3>
 
 
             <Button onClick={()=>navigate("/teams")}>Login</Button>
             <Button onClick={()=>navigate("/register")}>Register</Button>
 
-        </>
+        </Container>
     )
 
 }
