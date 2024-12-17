@@ -29,8 +29,10 @@ export const Login:React.FC = () => {
                 />
             </div>
 
-            <Button onClick={()=>navigate("/teams")}>Login</Button>
-            <Button onClick={()=>navigate("/register")}>Register</Button>
+            <div className="d-flex gap-1">
+                <Button onClick={()=>navigate("/teams")}>Login</Button>
+                <Button onClick={()=>navigate("/register")}>Register</Button>
+            </div>
 
         </Container>
     )

@@ -1,8 +1,14 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Container, Table } from "react-bootstrap"
+import { Button, Container, Table } from "react-bootstrap"
 
-//TODO: User Interface for type safety
+//User Interface for type safety
+interface User {
+    userId:number,
+    username:string,
+    role:string,
+    team:any //cutting a corner here, didn't wanna make a whole team interface :) should have made it global :p
+}
 
 export const Users:React.FC  = () => {
 
@@ -31,8 +37,10 @@ export const Users:React.FC  = () => {
     return(
         <Container>
 
+            <h3>Users:</h3>
+
             <Table className="table-primary table-hover">
-                <thead>
+                <thead className="table-dark">
                     <tr>
                         <th>User Id</th>
                         <th>Username</th>
@@ -42,7 +50,18 @@ export const Users:React.FC  = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* TODO: map thru selected users */}
+                    {users.map((user:User) => (
+                        <tr>
+                            <td>{user.userId}</td>
+                            <td>{user.username}</td>
+                            <td>{user.role}</td>
+                            <td>{user.team.teamName}</td>
+                            <td>
+                                {/* Conditional Rendering - promote button if the user is a player, and demote button if the user is a manager */}
+                                {user.role === "player" ? <Button>Promote</Button> : <Button className="btn-danger">Demote</Button>}
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </Table>
 
