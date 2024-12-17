@@ -1,14 +1,54 @@
-import { SyntheticEvent } from "react"
+import axios from "axios"
+import { SyntheticEvent, useState } from "react"
 import { Button, Container, Form } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
+
+interface User {
+    username:string,
+    password:string,
+    teamId:number
+}
 
 export const Register:React.FC = () => {
 
+    //Define a state object to store the new User info
+    const[newUser, setNewUser] = useState<User>({
+        username:"",
+        password:"",
+        teamId:0
+    })
+
+    //useNavigate to switch URLS
+    const navigate = useNavigate()
 
     //function that stores values when input boxes change
-    //SyntheticEvent is just the type of event coming in, we didn't need to specify data type, I'm just being typesafe
-    const storeValues = (event:SyntheticEvent) => {
+    //we didn't need to specify the param's data type, I'm just being typesafe
+    const storeValues = (event:React.ChangeEvent<HTMLInputElement>) => {
 
-        console.log(event)
+        console.log(event) //just to see the event in console
+
+        //I'm going to store name and value in variables, for ease of use below
+        const name = event.target.name 
+        const value = event.target.value
+        
+        //annoying syntax - We need to send the entire user object to make a change to one field
+        //"Take whatever input was changed, and set the matching state object field to the value of that input"
+        //[name] can be EITHER username or password here. Flexible! Whatever input changes will change the appropriate newUser state field
+        setNewUser((newUser) => ({...newUser, [name]:value}))
+
+        console.log(newUser)
+
+    }
+
+    //Register function that sends the username/password to the backend in a POST request
+    const register = async () => {
+
+        //TODO: check that the username/password are present and valid
+
+        //POST request
+        const response = await axios.post("http://localhost:4444/users", newUser)
+        .then(()=>alert("User " + newUser.username + " created!"))
+        .catch((error)=>{alert("Registration failed! Make sure all fields are correct")})
 
     }
 
@@ -33,9 +73,17 @@ export const Register:React.FC = () => {
                     onChange={storeValues}
                 />
             </div>
+            <div>
+                <Form.Control
+                    type="number"
+                    placeholder="team ID"
+                    name="teamId"
+                    onChange={storeValues}
+                />
+            </div>
             <div className="d-flex gap-1">
                 <Button>Back</Button>
-                <Button>Register</Button>
+                <Button onClick={register}>Register</Button>
             </div>
 
         </Container>
