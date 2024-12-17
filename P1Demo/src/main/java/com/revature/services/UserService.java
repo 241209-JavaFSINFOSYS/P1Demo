@@ -3,11 +3,14 @@ package com.revature.services;
 import com.revature.DAOs.TeamDAO;
 import com.revature.DAOs.UserDAO;
 import com.revature.models.DTOs.IncomingUserDTO;
+import com.revature.models.DTOs.OutgoingUserDTO;
 import com.revature.models.Team;
 import com.revature.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service //make this class a bean
@@ -82,6 +85,35 @@ public class UserService {
 
         //Why doesn't this create a duplicate user? how does it know it's an update?
 
+    }
+
+    //get all Users
+    public List<OutgoingUserDTO> getAllUsers(){
+
+        //Problem: findAll() return a list of Users. We need a list of DTOs
+        //Solution: loop through the User list and make a new List of DTOs
+
+        //Empty List of OutgoingUserDTOs to be filled below
+        List<OutgoingUserDTO> outgoingUsers = new ArrayList<>();
+
+        //get all Users from DB
+        List<User> users = userDAO.findAll();
+
+        //loop through the Users, adding a new DTO for each record
+        for(User user : users){
+
+            //add the new DTO to the ArrayList using the all-args constructor
+            outgoingUsers.add(new OutgoingUserDTO(
+                    user.getUserId(),
+                    user.getUsername(),
+                    user.getRole(),
+                    user.getTeam()
+            ));
+
+        }
+
+        //when the for loop breaks, we can return our list of DTOs
+        return outgoingUsers;
     }
 
 

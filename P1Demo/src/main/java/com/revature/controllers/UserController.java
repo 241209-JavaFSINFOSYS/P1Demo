@@ -1,15 +1,18 @@
 package com.revature.controllers;
 
 import com.revature.models.DTOs.IncomingUserDTO;
+import com.revature.models.DTOs.OutgoingUserDTO;
 import com.revature.models.User;
 import com.revature.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController //Combines @Controller and @ResponseBody
 @RequestMapping ("/users")//All HTTP requests ending in /users will be sent here
-//TODO: Add @CrossOrigin to allow requests from anywhere
+@CrossOrigin //Allows requests from any origin (not so secure!)
 public class UserController {
 
     //autowire the UserService
@@ -38,6 +41,14 @@ public class UserController {
 
         //one liner - send back a 202 (accepted) with the updated User
         return ResponseEntity.accepted().body(userService.updateUserPassword(userId, password));
+
+    }
+
+    //A method that gets all Users from the DB, returning a List of OutUserDTOs
+    @GetMapping
+    public ResponseEntity<List<OutgoingUserDTO>> getAllUsers(){
+
+        return ResponseEntity.ok(userService.getAllUsers());
 
     }
 
