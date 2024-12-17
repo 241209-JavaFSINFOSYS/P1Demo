@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Button, Container, Table } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
 
 //interface to model Team objects 
 interface Team {
@@ -20,6 +21,9 @@ export const Teams:React.FC = () => {
         getAllTeams()
     }, []) //this useEffect will trigger once, on component load
 
+    //useNavigate hook so we can change the URL as needed
+    const navigate = useNavigate()
+
     //The function that sends the GET request
     const getAllTeams = async () => {
 
@@ -33,8 +37,15 @@ export const Teams:React.FC = () => {
 
     }
 
+    //hypothetical DELETE team method (just to show how to extract IDs)
+    const deleteTeam = (teamId:number) => {
+        alert("Team " + teamId + " has been deleted (but not really)")
+    }
+
     return(
         <Container>
+
+            <Button className="btn-info" onClick={()=>{navigate("/")}}>Back</Button>
 
             <h3>Teams:</h3>
 
@@ -55,7 +66,8 @@ export const Teams:React.FC = () => {
                             <td>{team.teamName}</td>
                             <td>{team.teamLocation}</td>
                             <td>
-                                <Button className="btn-danger">Delete</Button>
+                                <Button className="btn-danger" onClick={()=>{deleteTeam(team.teamId)}}>Delete</Button>
+                                {/* attach the deleteTeam to the onClick through an arrow function so it doesn't invoke immediately on render*/}
                             </td>
                         </tr>
                     ))}
