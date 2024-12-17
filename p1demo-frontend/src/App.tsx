@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css' //NEED THIS IMPORT FOR BOOTSTRAP TO WO
 import { Login } from './Components/LoginRegister/Login'
 import { Register } from './Components/LoginRegister/Register'
 import { Teams } from './Components/Teams/Teams'
+import { Users } from './Components/Users/Users'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
           <Route path="" element={<Login/>}/>
           <Route path="register" element={<Register/>}/>
           <Route path="teams" element={<Teams/>}/>
+          <Route path="users" element={<Users/>}/>
         </Routes>
       </BrowserRouter>
     </>

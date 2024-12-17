@@ -45,10 +45,13 @@ export const Register:React.FC = () => {
 
         //TODO: check that the username/password are present and valid
 
-        //POST request
+        //POST request - saving the response, but we won't need to use it here
         const response = await axios.post("http://localhost:4444/users", newUser)
-        .then(()=>alert("User " + newUser.username + " created!"))
-        .catch((error)=>{alert("Registration failed! Make sure all fields are correct")})
+        .then(()=>{
+            alert("User " + newUser.username + " created!")
+            navigate("/")
+        })
+        .catch(()=>{alert("Registration failed! Make sure all fields are correct")})
 
     }
 
@@ -82,7 +85,7 @@ export const Register:React.FC = () => {
                 />
             </div>
             <div className="d-flex gap-1">
-                <Button>Back</Button>
+                <Button onClick={() => navigate("/")}>Back</Button>
                 <Button onClick={register}>Register</Button>
             </div>
 
