@@ -53,6 +53,13 @@ export const Login:React.FC = () => {
             }
 
         )
+        .catch((error) => {
+            console.log(error)
+            //if login fails, basic bad-manners alert to tell them they goofed
+            alert(error.response.data)
+            //You could also just write a custom message
+            }
+        )
 
     }
 
