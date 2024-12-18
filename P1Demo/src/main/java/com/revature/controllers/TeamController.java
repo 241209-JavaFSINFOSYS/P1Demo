@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController //Combines @Controller and @ResponseBody
 @RequestMapping("/teams") //All HTTP requests ending in /teams will be sent here
-@CrossOrigin //Allows requests from any origin (including our frontend)
+@CrossOrigin(value = "http://localhost:5173", allowCredentials = "true") //Allows requests from any origin (including our frontend)
 public class TeamController {
 
     //We're going to use constructor injection to dependency inject the Service
