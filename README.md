@@ -10,13 +10,13 @@ A Full Stack Application with a PostgreSQL Database, Spring Boot backend, and a 
 ## User Interface, styled with bootstrap
 
 - Login
-  ![Login](../imgs/login.png)
+  ![Login](./imgs/login.png)
 
 - Register
-  ![Register](../imgs/register.png)
+  ![Register](./imgs/register.png)
 
 - Get all Users
-  ![Get all Users](../imgs/users.png)
+  ![Get all Users](./imgs/users.png)
 
 - Get all Teams
-  ![Get all Teams](../imgs/teams.png)
+  ![Get all Teams](./imgs/teams.png)
