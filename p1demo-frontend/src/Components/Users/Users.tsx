@@ -13,7 +13,7 @@ interface User {
 export const Users:React.FC  = () => {
 
     //state object to store the User Array from the DB
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState<User>([])
 
     //useEffect to call the get request to get all users on component load
     useEffect(()=>{
@@ -25,7 +25,7 @@ export const Users:React.FC  = () => {
     //Function to get all users 
     const getAllUsers = async () => {
 
-        const response = await axios.get("http://localhost:4444/users")
+        const response = await axios.get("http://localhost:4444/users", {withCredentials:true})
         .then((response)=>{
             console.log(response)
             setUsers(response.data)

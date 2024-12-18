@@ -28,7 +28,7 @@ export const Teams:React.FC = () => {
     const getAllTeams = async () => {
 
         //axios GET request
-        const response = await axios.get("http://localhost:4444/teams")
+        const response = await axios.get("http://localhost:4444/teams", {withCredentials:true})
 
         //populate the teams state object
         setTeams(response.data)

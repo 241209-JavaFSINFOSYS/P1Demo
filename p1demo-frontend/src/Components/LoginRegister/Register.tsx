@@ -46,7 +46,7 @@ export const Register:React.FC = () => {
         //TODO: check that the username/password are present and valid
 
         //POST request - saving the response, but we won't need to use it here
-        const response = await axios.post("http://localhost:4444/users", newUser)
+        const response = await axios.post("http://localhost:4444/users", newUser, {withCredentials:true})
         .then(()=>{
             alert("User " + newUser.username + " created!")
             navigate("/")
