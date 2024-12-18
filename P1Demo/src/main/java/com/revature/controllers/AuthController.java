@@ -21,27 +21,18 @@ public class AuthController {
         this.authService = authService;
     }
 
-    //uninitialized HttpSession (filled upon login)
-    public static HttpSession session;
-
-    //TODO: we could make getter/setter for this session so we don't break encapsulation
-
     @PostMapping
     public ResponseEntity<OutgoingUserDTO> login(@RequestBody LoginDTO loginDTO, HttpSession session){
 
         //NOTE: we have an HTTP Session coming in via parameters, inherently included in HTTP requests
-        //This is a different session than the static one declared above
-        //We're going to use it to help initialize our static session
 
         //send the loginDTO to the service
         OutgoingUserDTO user = authService.login(loginDTO);
 
         //If we get here, login was successful and we can create the session!
-        AuthController.session = session; //the passed in session initializes our static session
-
-        AuthController.session.setAttribute("userId", user.getUserId());
-        AuthController.session.setAttribute("username", user.getUsername());
-        AuthController.session.setAttribute("role", user.getRole());
+        session.setAttribute("userId", user.getUserId());
+        session.setAttribute("username", user.getUsername());
+        session.setAttribute("role", user.getRole());
 
         System.out.println("User " + user.getUsername() + " logged in!");
 
