@@ -1,6 +1,7 @@
 package com.revature.aspects;
 
 import jakarta.servlet.http.HttpSession;
+import org.apache.coyote.Request;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
@@ -46,6 +47,22 @@ public class AuthAspect {
             "&& !execution(* com.revature.controllers.AuthController.*(..))")
 
     * */
+
+    //This advice will check if the requester is a manager before any method with the @AdminOnly annotation
+    @Before("@annotation(com.revature.aspects.AdminOnly)")
+    public void checkAdmin(){
+
+        //If the logged in User's role != "manager" throw an exception
+        if(!"manager".equals(((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+                .getRequest().getSession().getAttribute("role"))){
+
+            throw new IllegalArgumentException("User is not a manager!");
+
+        }
+
+        //This is accessing the Session like how we did in checkLogin, but as a one liner
+
+    }
 
 
 }

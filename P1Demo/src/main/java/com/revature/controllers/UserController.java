@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.aspects.AdminOnly;
 import com.revature.models.DTOs.IncomingUserDTO;
 import com.revature.models.DTOs.OutgoingUserDTO;
 import com.revature.models.User;
@@ -46,6 +47,7 @@ public class UserController {
 
     //A method that gets all Users from the DB, returning a List of OutUserDTOs
     @GetMapping
+    @AdminOnly //only Admins can access this method (enforced by AuthAspect)
     public ResponseEntity<List<OutgoingUserDTO>> getAllUsers(){
 
         return ResponseEntity.ok(userService.getAllUsers());
