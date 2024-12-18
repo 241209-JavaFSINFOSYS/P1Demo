@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import org.apache.coyote.Request;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -22,6 +23,7 @@ public class AuthAspect {
     //every method you see below is an advice
 
 
+    @Order(1) //This advice will always go first
     //This advice will check if the requester is logged in after any controller method is called
         //EXCEPT for login or register
     //@Before lets this advice run BEFORE any of the specified methods are called
@@ -48,8 +50,9 @@ public class AuthAspect {
 
     * */
 
+    @Order(2) //This advice will always go second
     //This advice will check if the requester is a manager before any method with the @AdminOnly annotation
-    @Before("@annotation(com.revature.aspects.AdminOnly)")
+    @Before("@annotation(AdminOnly)")
     public void checkAdmin(){
 
         //If the logged in User's role != "manager" throw an exception
