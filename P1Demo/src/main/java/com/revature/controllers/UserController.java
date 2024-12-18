@@ -52,19 +52,4 @@ public class UserController {
 
     }
 
-
-
-    //TODO: We've duplicated this exc handling code
-    //Which tells us we should probably make a global exception handler instead
-
-    //Exception Handling for IllegalArgExc
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> handleIllegalArgument(IllegalArgumentException e){
-
-        //If an IllegalArgument is thrown, send back a 400 (bad request)
-        //with the Exception message in the response body
-        return ResponseEntity.badRequest().body(e.getMessage());
-
-    }
-
 }

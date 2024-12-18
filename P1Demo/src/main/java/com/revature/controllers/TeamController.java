@@ -65,19 +65,4 @@ public class TeamController {
 
     }
 
-
-    //Exception Handlers------------------------------
-
-    //Spring MVC has a built in Exception handler that cleans up our Controller methods
-
-    //Exception handler for IllegalArgumentException
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> handleIllegalArgument(IllegalArgumentException e){
-
-        //If an IllegalArgument is thrown, send back a 400 (bad request)
-        //with the Exception message in the response body
-        return ResponseEntity.badRequest().body(e.getMessage());
-
-    }
-
 }
