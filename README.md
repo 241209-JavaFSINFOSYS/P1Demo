@@ -16,7 +16,7 @@ A Full Stack Application with a PostgreSQL Database, Spring Boot backend, and a 
   ![Register](./imgs/register.png)
 
 - Get all Users
-  ![Get all Users](./imgs/users.png)
+  ![Get all Users](./imgs/Users.png)
 
 - Get all Teams
-  ![Get all Teams](./imgs/teams.png)
+  ![Get all Teams](./imgs/Teams.png)
