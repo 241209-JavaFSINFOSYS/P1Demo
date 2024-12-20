@@ -1,6 +1,8 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Button, Container, Table } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
+import { store } from "../../GlobalData/store"
 
 //User Interface for type safety
 interface User {
@@ -15,8 +17,17 @@ export const Users:React.FC  = () => {
     //state object to store the User Array from the DB
     const [users, setUsers] = useState<User>([])
 
+    //useNavigate hook
+    const navigate = useNavigate()
+
     //useEffect to call the get request to get all users on component load
     useEffect(()=>{
+
+        //check that the user is a "manager", otherwise route them back to login
+        if(store.loggedInUser.role != "manager"){
+            navigate("/")
+        }
+
         getAllUsers()
     }, []) //[] so that this runs only once, when the component re-renders
 

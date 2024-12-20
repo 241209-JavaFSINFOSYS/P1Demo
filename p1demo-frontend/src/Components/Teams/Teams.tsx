@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { Button, Container, Table } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
+import { store } from "../../GlobalData/store"
 
 //interface to model Team objects 
 interface Team {
@@ -46,6 +47,8 @@ export const Teams:React.FC = () => {
         <Container>
 
             <Button className="btn-info" onClick={()=>{navigate("/")}}>Back</Button>
+
+            <h2>Welcome {store.loggedInUser.username} of {store.loggedInUser.team.teamName}</h2>
 
             <h3>Teams:</h3>
 

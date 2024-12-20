@@ -12,7 +12,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          {/* empty string or / for path ro render a component at startup */}
+          {/* empty string or / for path to render a component at startup */}
           <Route path="" element={<Login/>}/>
           <Route path="register" element={<Register/>}/>
           <Route path="teams" element={<Teams/>}/>
